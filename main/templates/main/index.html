@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+			{% for profile in profiles %}
+			<title>{{profile.first_name}} {{profile.last_name}}</title>
+			{% endfor %}
+		<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+	</head>
+
+	<body> 
+
+		<div class="category">
+
+			<div class="nav-content" id="nav-content">
+
+				<div class="main-nav">
+					
+				
+					<div class="banner-header">
+						<div class="banner-logo">
+								{% for profile in profiles%}
+									<h1 class="banner-h">{{profile.first_name}} {{profile.last_name}}.</h1>
+								{% endfor %}
+						</div>
+
+						
+
+						<div class="banner-content">
+							<ul class="navlist" id="navlist">
+								<li><a href="#category">Casa</a></li>
+								<li><a href="#service-content">Serviços</a></li>
+								<li><a href="https://github.com/dagama17">Projetos</a></li>
+								<li><a class="banner-li-me" style="font-size: 16px;font-weight: normal;" href="#agent-page">Contratar</a></li>
+							</ul>
+						</div>
+
+						<div class="responsive-menu" >
+							<img class="menu" id="menu" onClick="slide1();" src="{% static 'icon\menu.svg' %}">
+						</div>
+
+						<script type="text/javascript">
+							var menu = document.getElementById('navlist');
+							
+
+							function slide1(){
+								menu.classList.toggle('slide');
+							}
+
+						</script>
+					</div>
+					
+					<div class="middle-content">
+						{% for profile in profiles %}
+					
+						<div class="title-content">
+								
+								<h1 class="title-h"> Eu sou<br>{{profile.specialty}}</h1>
+								
+								
+
+								<div class="bio-box-content">
+									<p class="bio-content">{{profile.bio}}</p>
+								</div>
+								
+								<div class="download-content">
+
+									<a class="dwn-btn" href="{{profile.cv.url}}"><img src="{% static 'icon/file-document.svg' %}"> Baixar cv</a>
+								</div>
+
+
+						</div>
+
+						<div class="image-content">
+							<div class="image-items">
+								<img src="{{profile.image.url}}">
+							</div>
+									
+						</div>
+					</div>
+					{% endfor %}
+					<div class="header-footer">
+						<ul>
+							<li><a href="https://github.com/dagama17"><img src="{% static 'icon\github.svg' %}"></a></li>
+							<li><a href="#"><img src="{% static 'icon\twitter.svg' %}"></a></li>
+							<li><a href="#"><img src="{% static 'icon\facebook.svg' %}"></a></li>
+							<li><a href="#"><img src="{% static 'icon\linkedin-round.svg' %}"></a></li>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="service-page" id="service-category">
+				{% for service in services%}
+					<div class="service-content", id="service-content">
+						<div class="content-box fcontent-box">
+							<div class="service-content-image"><img src="{{service.picture.url}}"></div>
+							<h2>{{service.title}}</h2>
+							<p class="desc-service"> <strong>Habilidade que você tera:</strong>{{service.description}}</p>
+							<span class="stars-ratings fcontent-star">
+								{% for star in stars%}
+
+									<img class="stars-rating" src="{% static 'icon\star_icon.svg' %}">
+									
+								{% endfor %}
+							
+							
+							<img class="stars-rating" src="{% static 'icon\star_unfiled.svg' %}">
+							<img class="stars-rating" src="{% static 'icon\star_unfiled.svg' %}">		
+							</span>
+							<div class="price-service"><a href="#">{{service.price}} kz</a></div>
+							<small><p style="font-size: 13px;" class="duration-service">{{service.duration}}</p></small>
+						</div>	
+					</div>
+				{% endfor %}
+			</div>
+
+			<div class="agent-page" id="agent-page">
+				<div class="agent-pos-content">
+					{% for agent in agents %}
+					<div class="agent-image">
+						<div class="agent-picture"><img src="{{agent.image.url}}"></div>
+					</div>
+
+					<div class="agent-info">
+						<h1 class="agent-name">{{agent.first_name}} {{agent.last_name}}.</h1>
+						<div class="agent-info-p">
+							<p><img src="{% static 'icon\mail.svg' %}"> {{agent.email}}</p>
+						<p><img src="{% static 'icon\phone-fill.svg' %}"> {{agent.number}}</p>
+						</div>
+						
+
+						<div class="social-content">
+							<ul>
+								<li><a href="https://github.com/dagama17"><img src="{% static 'icon\github.svg' %}"></a></li>
+								<li><a href="#"><img src="{% static 'icon\twitter.svg' %}"></a></li>
+								<li><a href="#"><img src="{% static 'icon\facebook.svg' %}"></a></li>
+								<li><a href="#"><img src="{% static 'icon\linkedin-round.svg' %}"></a></li>
+								
+							</ul>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+
+		</div>
+
+
+			<div class="top-btn">
+				<button onclick="topFunction()" id="myBtn" title="Para cima"><img src="{% static 'icon\up-arrow-fill.svg' %}"></button>
+			</div>
+
+			<script>
+				// Get the button
+				let mybutton = document.getElementById("myBtn");
+
+				// When the user scrolls down 20px from the top of the document, show the button
+				window.onscroll = function() {scrollFunction()};
+
+				function scrollFunction() {
+				  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				    mybutton.style.display = "block";
+				  } else {
+				    mybutton.style.display = "none";
+				  }
+				}
+
+				// When the user clicks on the button, scroll to the top of the document
+				function topFunction() {
+				  document.body.scrollTop = 0;
+				  document.documentElement.scrollTop = 0;
+				}
+			</script>
+
+
+			<script>
+				let menu = document.querySelector('#menu');
+				let navlist = document.querySelector('.navlist');
+
+				menu.onclick = () {
+					menu.classList.toggle('.menu');
+					navlist.classList.toggle('open');
+				}
+
+
+			</script>
+	</body>
+</html>
